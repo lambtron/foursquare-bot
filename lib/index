@@ -6,11 +6,14 @@
 
 var co = require('co');
 var fsq = require('./foursquare');
+var db = require('./db');
 
 /**
  * Run.
  */
 
 co(function *() {
-  yield fsq.trending();
+  var res = yield fsq.trending();
+  if (!res || res.meta.code !== 200) throw new Error('Oops.');
+  return yield db.add(res.response.venues);
 });
