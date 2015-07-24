@@ -1,0 +1,16 @@
+#!/usr/bin/env node --harmony
+
+/**
+ * Module dependencies.
+ */
+
+var co = require('co');
+var fsq = require('./foursquare');
+
+/**
+ * Run.
+ */
+
+co(function *() {
+  yield fsq.trending();
+});
